@@ -4,16 +4,25 @@
   (box :class "bar"
        :orientation "horizontal"
     (workspaces)
+    (battery_percentage)
     (clock)))
 
 ; center box
 (defwidget workspaces []
   (box :class "workspaces"
        :halign "center"
-    (for i in "[1, 2, 3, 4, 5, 6, 7, 8, 9]"
-      (button :onclick "./scripts/dispatch_workspace ${i}" "${i}"))))
+       :space-evenly true
+       :spacing 10
+    (for i in "[1, 2, 3, 4, 5, 6]"
+      (button :onclick "./scripts/dispatch_workspace ${i}" ""))))
 
 ; right box
+(defwidget battery_percentage []
+  (label :class "battery_percentage"
+         :halign "end"
+         :tooltip "${battery_percentage}%"
+         :text "ABC"))
+
 (defwidget cal []
   (calendar :class "cal"
             :day current_day
@@ -24,4 +33,4 @@
        :halign "end"
     (eventbox :onhover "./scripts/open_calendar"
               :onhoverlost "./scripts/close_calendar"
-      (label :text current_time))))
+      (label :text "${current_time}"))))
