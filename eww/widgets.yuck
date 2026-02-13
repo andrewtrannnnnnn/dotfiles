@@ -4,33 +4,37 @@
   (box :class "bar"
        :orientation "horizontal"
     (workspaces)
-    (battery_percentage)
-    (clock)))
+    (right_box)))
 
-; center box
+; left box
 (defwidget workspaces []
   (box :class "workspaces"
-       :halign "center"
+       :orientation "horizontal"
+       :halign "start"
        :space-evenly true
        :spacing 10
     (for i in "[1, 2, 3, 4, 5, 6]"
-      (button :onclick "./scripts/dispatch_workspace ${i}" ""))))
+      (button :onclick "hyprctl dispatch workspace ${i}" "${i}"))))
 
 ; right box
+(defwidget right_box []
+  (box :class "right_box"
+       :halign "end"
+    (battery_percentage)
+    (clock)))
+
 (defwidget battery_percentage []
   (label :class "battery_percentage"
-         :halign "end"
          :tooltip "${battery_percentage}%"
-         :text "ABC"))
+         :text "${battery_status}"))
+
+(defwidget clock []
+  (eventbox :class "clock"
+            :onhover "eww open cal -c ."
+            :onhoverlost "eww close cal -c ."
+    (label :text "${current_time}")))
 
 (defwidget cal []
   (calendar :class "cal"
-            :day current_day
-            :year current_year))
-
-(defwidget clock []
-  (box :class "clock"
-       :halign "end"
-    (eventbox :onhover "./scripts/open_calendar"
-              :onhoverlost "./scripts/close_calendar"
-      (label :text "${current_time}"))))
+            :day "${current_day}"
+            :year "${current_year}"))
