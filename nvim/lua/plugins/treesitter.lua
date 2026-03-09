@@ -4,7 +4,17 @@ return {
     opts = function(_, opts)
       return {
         ensure_installed = {
-          "javascript"
+          "lua",
+          "javascript",
+          "jsx",
+          "typescript",
+          "tsx",
+        },
+        highlight = {
+          enable = true,
+        },
+        indent = {
+          enable = true,
         },
       }
     end,

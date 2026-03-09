@@ -2,15 +2,18 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
+      "neovim/nvim-lspconfig",
       {
         "mason-org/mason.nvim",
-        opts = {},
+        opts = function(_, opts)
+          return {}
+        end,
       },
-      "neovim/nvim-lspconfig",
     },
     opts = function(_, opts)
       return {
         ensure_installed = {
+          "jsonls",
           "lua_ls",
           "ts_ls",
           "texlab",

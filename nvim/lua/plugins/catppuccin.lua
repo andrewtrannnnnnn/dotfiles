@@ -5,7 +5,7 @@ return {
     priority = 1000,
     opts = function(_, opts)
       return {
-        flavour = "macchiato",
+        flavour = "mocha",
         integrations = {
           cmp = true,
           telescope = true,
